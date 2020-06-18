@@ -91,6 +91,10 @@ function generatePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
   var shuffledPass = shuffleArray(passArray);
   console.log(shuffledPass);
 
+  var stringPass = shuffledPass.join("");
+  console.log(stringPass);
+  return stringPass;
+
 }
 
 // Randomize array in-place using Durstenfeld shuffle algorithm
