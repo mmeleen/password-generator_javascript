@@ -40,7 +40,6 @@ function writePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
 
 //Generate password adhering to user criteria
 function generatePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
-  //console.log(length, hasLow, hasUpp, hasNum, hasChar);
   var totalSet = [];
   var passArray = [];
 
