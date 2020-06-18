@@ -9,9 +9,9 @@ var charSet = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", "/", ":", 
 
 // Function for user prompts, passes values to writePassword
 function promptUser(){
-  var length = prompt("Please type a password length (number between 8 and 128)");
-  console.log(length);
-  if (length < 8 || length > 128 || isNaN(length)) {
+  var passLength = prompt("Please type a password length (number between 8 and 128)");
+  console.log(passLength);
+  if (passLength < 8 || passLength > 128 || isNaN(passLength)) {
   	alert("Please enter a valid length");
     return;
     //promptUser();
@@ -26,20 +26,20 @@ function promptUser(){
     return;
     //promptUser();
   }
-  console.log(length, hasLow, hasUpp, hasNum, hasChar);
-  writePassword(length, hasLow, hasUpp, hasNum, hasChar);
+  console.log(passLength, hasLow, hasUpp, hasNum, hasChar);
+  writePassword(passLength, hasLow, hasUpp, hasNum, hasChar);
 }
 
 // Write password to the #password input
-function writePassword(length, hasLow, hasUpp, hasNum, hasChar) {
+function writePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
   //console.log(length, hasLow, hasUpp, hasNum, hasChar);
-  var password = generatePassword(length, hasLow, hasUpp, hasNum, hasChar);
+  var password = generatePassword(passLength, hasLow, hasUpp, hasNum, hasChar);
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
 }
 
 //Generate password adhering to user criteria
-function generatePassword(length, hasLow, hasUpp, hasNum, hasChar) {
+function generatePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
   //console.log(length, hasLow, hasUpp, hasNum, hasChar);
   var totalSet = [];
   var passArray = [];
@@ -49,32 +49,45 @@ function generatePassword(length, hasLow, hasUpp, hasNum, hasChar) {
     console.log(totalSet);
     var randomLow = lowSet[Math.floor(Math.random() * lowSet.length)];
     passArray.push(randomLow);
+    console.log(randomLow);
     console.log(passArray); 
   }
 
   if (hasUpp) {
     totalSet = totalSet.concat(uppSet);
     console.log(totalSet);
-    var randomUpp = UppSet[Math.floor(Math.random() * UppSet.length)];
+    var randomUpp = uppSet[Math.floor(Math.random() * uppSet.length)];
     passArray.push(randomUpp);
+    console.log(randomUpp);
     console.log(passArray);   
   }
 
   if (hasNum) {
     totalSet = totalSet.concat(numSet);
     console.log(totalSet);
-    var randomNum = NumSet[Math.floor(Math.random() * NumSet.length)];
+    var randomNum = numSet[Math.floor(Math.random() * numSet.length)];
     passArray.push(randomNum);
+    console.log(randomNum);
     console.log(passArray);   
   }
 
   if (hasChar) {
     totalSet = totalSet.concat(charSet);
     console.log(totalSet);
-    var randomChar = CharSet[Math.floor(Math.random() * CharSet.length)];
+    var randomChar = charSet[Math.floor(Math.random() * charSet.length)];
     passArray.push(randomChar);
+    console.log(randomChar);
     console.log(passArray);   
   }
+
+  while (passArray.length < passLength) {
+    var randomAny = totalSet[Math.floor(Math.random() * totalSet.length)];
+    passArray.push(randomAny);
+    console.log(randomAny);
+    console.log(passArray);
+  }
+
+  console.log(passArray);
 
 
 }
