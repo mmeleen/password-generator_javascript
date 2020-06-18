@@ -12,7 +12,7 @@ function promptUser(){
   var passLength = prompt("Please type a password length (number between 8 and 128)");
   // Check for valid length entry
   if (passLength < 8 || passLength > 128 || isNaN(passLength)) {
-  	alert("Please enter a valid length");
+  	alert("Invalid length. Please try again.");
     return;
   }
   // Character selection user prompts
@@ -23,7 +23,7 @@ function promptUser(){
   var hasChar = confirm("Include special characters?");
   // Ensure that at least one option was confirmed
   if ((hasLow == false) && (hasUpp == false) && (hasNum == false) && (hasChar == false)){
-    alert("Please select at least one option");
+    alert("Must select at least one option.\nPlease try again.");
     return;
   }
   // Call and pass values to writePassword function
