@@ -7,8 +7,16 @@ var lowSet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "
 var uppSet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var charSet = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", "/", ":", ";", ">", "?", "@", "[", "]", "^", "{", "}", "~", "|"];
 
-// Prompt user for length and booleans
-function promptUser(){
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
+
+//Generate password adhering to user criteria
+function generatePassword() {
+  // Password length user prompt
   var passLength = prompt("Please type a password length (number between 8 and 128)");
   // Check for valid length entry
   if (passLength < 8 || passLength > 128 || isNaN(passLength)) {
@@ -26,19 +34,6 @@ function promptUser(){
     alert("Must select at least one option.\nPlease try again.");
     return;
   }
-  // Call and pass values to writePassword function
-  writePassword(passLength, hasLow, hasUpp, hasNum, hasChar);
-}
-
-// Write password to the #password input
-function writePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
-  var password = generatePassword(passLength, hasLow, hasUpp, hasNum, hasChar);
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-}
-
-//Generate password adhering to user criteria
-function generatePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
   
   // Empty arrays for total character pool and eventual password array
   var totalSet = [];
@@ -88,8 +83,6 @@ function generatePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
   while (passArray.length < passLength) {
     var randomAny = totalSet[Math.floor(Math.random() * totalSet.length)];
     passArray.push(randomAny);
-    console.log(randomAny);
-    console.log(passArray);
   }
 
   console.log(passArray);
@@ -109,7 +102,6 @@ function generatePassword(passLength, hasLow, hasUpp, hasNum, hasChar) {
 
 // Randomize array using Durstenfeld shuffle algorithm; return array
 function shuffleArray(array) {
-  console.log(array);
   for (var i = array.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var temp = array[i];
@@ -120,4 +112,4 @@ function shuffleArray(array) {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", promptUser);
+generateBtn.addEventListener("click", writePassword);
